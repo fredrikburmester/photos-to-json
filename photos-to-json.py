@@ -12,19 +12,23 @@ sys.stdout = g
 
 mypath = "/unraid-data/appdata/NginxProxyManager/static/images"
 
-firstTime = 0
-
 f = []
-print('[')
 id = 0
+firstTime = 0
+ignored_files= [".DS_Store"]
+
+print('[')
 for dirname in walk(mypath):
     for album in dirname[1]:
-        album.replace("\u00f6", "o\u0308")
+        album.replace("\u00f6", "o\u0308") # ö
+        album.replace("\u00D6", "O\u0308") # Ö
+        album.replace("\u00E4", "a\u0308") # ä
+        album.replace("\u00C4", "A\u0308") # Ä
         currentImage = []
         for image in walk(mypath + '/' + album):
             counter = 0
             for i in image[2]:
-                if i != ".DS_Store":
+                if i not in ignored_files:
                     name = i.split('.')[0]
                     if len(name) > 0:
                         currentImage.append(name)
