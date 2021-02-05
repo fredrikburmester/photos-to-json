@@ -10,7 +10,5 @@ This python program will scan a folder and all its subfolders, look for all file
   display	"<vertical|landscape"
   x	= <width in px>
   y	= <height in px>
-},
-{...}
-]
+}]
 ```
