@@ -15,3 +15,6 @@ This python program will scan a folder and all its subfolders, look for all file
 The exported filename is `photos.json`. The export path is hardcoded but is easily changed.
 
 **Note:** If the file `photos.json` already exist the exact path, then that files content will be copied into the new file and the existing information about a certain file will not be overwritten. This means that if you were to change a files name or resolution etc. then that will be carried over to the new file.  
+
+## To-do
+- Break up file into functions
