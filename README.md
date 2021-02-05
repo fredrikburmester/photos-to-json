@@ -7,7 +7,7 @@ This python program will scan a folder and all its subfolders, look for all file
   title ""
   album "<folder-name>"
   filename "<filename>"
-  display "<vertical|landscape"
+  display "<tall|wide>"
   x = <width in px>
   y = <height in px>
 }]
