@@ -24,7 +24,7 @@ Directory
     - filename.jpg
 ```
 ## Result
-This python program will scan a folder and all its subfolders, look for all files with a jpg file extention and then create a JSON file with the following structure:
+The JSON file will have the following structure:
 ```
 [{
   title ""
