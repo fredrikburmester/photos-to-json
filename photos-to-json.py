@@ -74,56 +74,68 @@ def getOrientation(i):
     else:
         return 'tall'
 
+albums = []
 
 for dirname in walk(photosDirectory):
-    for album in dirname[1]:
-        album = replaceUTFCharacters(album)
+    albums = dirname[1]
+    break
 
-        sys.stdout = console
-        print("Processing: " + album)
+print("\nFound " + str(len(albums)) + " albums.")
+for album in albums:
+    print(" - " + album)
+print("")
 
-        albumImages = []
-        for image in walk(photosDirectory + '/' + album):
-            # Get filename
-            for filename in image[2]: 
-                print(" - " + filename)
-                if filename not in ignored_files:
-                    filename = replaceUTFCharacters(filename)
-                    albumImages.append(filename)
-                else: 
-                    print("   - [Ignored] " + filename)
+for album in dirname[1]:
+    album = replaceUTFCharacters(album)
 
-            albumImages = natsorted(albumImages, reverse=True)
+    sys.stdout = console
+    print("Processing: " + album)
 
-        for filename in albumImages:
+    files = []
+
+    for directory in walk(photosDirectory + '/' + album):
+        files = directory[2]
+        break
+
+    files = natsorted(files, reverse=True)
+
+    for filename in files:
+        try: 
             im = Image.open(photosDirectory + '/' + album + '/' + filename)
+            im.verify()
+        except:
+            sys.stdout = console
+            print("   - [Failed] " + filename)
+            continue
+        
+        sys.stdout = console
+        print("   - " + filename)
+        orientation = getOrientation(im)
 
-            orientation = getOrientation(im)
+        for(x) in (data):
+            if(x['filename'] == filename and x['album'] == album):
+                title = x['title']
+                orientation = x['display']
 
-            for(x) in (data):
-                if(x['filename'] == filename and x['album'] == album):
-                    title = x['title']
-                    orientation = x['display']
+        album = getBackUTFCharacters(album)
 
-            album = getBackUTFCharacters(album)
+        jsonitem = {
+            'id': id,
+            'title': '',
+            'album': str(album),
+            'filename': filename,
+            'display': orientation,
+            'x': im.size[0],
+            'y': im.size[1]
+        }
 
-            jsonitem = {
-                'id': id,
-                'title': '',
-                'album': str(album),
-                'filename': filename,
-                'display': orientation,
-                'x': im.size[0],
-                'y': im.size[1]
-            }
+        student_dumped = json.dumps(jsonitem)
 
-            student_dumped = json.dumps(jsonitem)
+        sys.stdout = g # redirect output to json file
+        
+        if id != 0:
+            print(',')
+        id += 1
 
-            sys.stdout = g # redirect output to json file
-            
-            if id != 0:
-                print(',')
-            id += 1
-
-            print(student_dumped)
+        print(student_dumped)
 print(']')
