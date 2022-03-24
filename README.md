@@ -39,9 +39,12 @@ The JSON file will have the following structure:
 The exported filename is `photos.json`.
 
 ## 🧑🏻‍💻 Usage
+Example:
 ```
-Usage: `photos-to-json.py <photosDirectory> <jsonDirectory>`
-Example: `photos-to-json.py /User/john/images /User/john/json`
+virtual env . 
+source bin/activate
+pip install -r requirements.txt
+photos-to-json.py /User/john/images /User/john/json
 ```
 
 ## To-do
